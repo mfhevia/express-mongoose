@@ -5,20 +5,29 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=test istanbul cover _mocha ./test --recursive --exit",
     "start-dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "celebrate": "^9.0.1",
     "express": "^4.16.4",
     "getconfig": "^4.5.0",
     "joi": "^14.3.1",
-    "mongoose": "^5.4.2",
+    "mongoose": "^5.4.3",
     "mongoose-timestamp": "^0.6.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9"
+    "chai": "^4.2.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.12.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.9",
+    "supertest": "^3.3.0"
   }
 }

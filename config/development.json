@@ -4,6 +4,6 @@
       "host": "localhost"
     },
     "db": {
-      "url": "mongodb://127.0.0.1/tests"
+      "url": "mongodb://127.0.0.1/express-mongoose-develop"
     } 
 }

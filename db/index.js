@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
-const config = require('getconfig');
 
-const DB_URL = process.env.DB_URL || config.db.url;
-
-const db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'connection error:'));
-
-db.once('open', () => {
-    console.log('Database connection successful')
+mongoose.connection.once('open', () => {
+  console.log('Database connection successful');
 });
 
-module.exports.connect = () => mongoose.connect(DB_URL, { useNewUrlParser: true });
+mongoose.connection.on('error', (err) => {
+  console.log('Mongo error connection', err);
+  process.exit(1);
+});
 
+module.exports = {
+  connect: db => mongoose.connect(db, { useNewUrlParser: true, promiseLibrary: global.Promise }),
+  close: () => mongoose.connection.close(),
+};
