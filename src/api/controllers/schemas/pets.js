@@ -1,12 +1,23 @@
-const joi = require('joi');
+const { Joi } = require('celebrate');
+Joi.objectId = require('joi-objectid')(Joi);
 
 const petSchema = {
-  body: joi.object().keys({
-    name: joi.string().required(),
-    type: joi.string().valid('dog', 'cat').required(),
-    size: joi.string().valid('mini', 'medium', 'large', 'huge').required(),
-    color: joi.string().optional(),
+  body: Joi.object().keys({
+    name: Joi.string().required(),
+    type: Joi.string().valid('dog', 'cat').required(),
+    size: Joi.string().valid('mini', 'medium', 'large', 'huge').required(),
+    color: Joi.string().optional(),
+    owner: Joi.objectId().optional()
   }),
 };
 
-module.exports = petSchema;
+const petIdSchema = {
+  params: {
+    id: Joi.objectId().required()
+  }
+}
+
+module.exports = {
+  petSchema,
+  petIdSchema
+};

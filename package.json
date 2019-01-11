@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "cross-env NODE_ENV=test istanbul cover _mocha ./test --recursive --exit",
+    "test": "cross-env NODE_ENV=test nyc mocha ./test --recursive --exit",
     "start-dev": "nodemon index.js"
   },
   "author": "",
@@ -14,9 +14,13 @@
     "body-parser": "^1.18.3",
     "celebrate": "^9.0.1",
     "express": "^4.16.4",
+    "express-boom": "^2.0.0",
     "getconfig": "^4.5.0",
     "joi": "^14.3.1",
+    "joi-objectid": "^2.0.0",
+    "lodash": "^4.17.11",
     "mongoose": "^5.4.3",
+    "mongoose-autopopulate": "^0.9.1",
     "mongoose-timestamp": "^0.6.0"
   },
   "devDependencies": {
@@ -28,6 +32,7 @@
     "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.9",
+    "nyc": "^13.1.0",
     "supertest": "^3.3.0"
   }
 }

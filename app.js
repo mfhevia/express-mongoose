@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
+const boom = require('express-boom');
 
 const app = express();
 const router = express.Router();
@@ -9,9 +10,11 @@ const router = express.Router();
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
+// standard boom errors in all api error responses
+app.use(boom());
 
 const models = require('./src/models');
-const controllers = require('./src/api/controllers')(router, models)
+const controllers = require('./src/api/controllers')(router, models);
 
 controllers.register();
 app.use('/', router);

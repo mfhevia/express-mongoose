@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const timestamp = require('mongoose-timestamp');
+const autopopulate = require('mongoose-autopopulate');
 
 const petSchema = new Schema({
   name: {
@@ -20,15 +21,14 @@ const petSchema = new Schema({
     type: String,
     required: false,
   },
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'Owner',
+    autopopulate: true,
+    required: false
+  }
 });
 
 petSchema.plugin(timestamp);
-
-const PetModel = model('Pet', petSchema);
-
-petSchema.statics.create = (pet) => {
-  const petInstance = new PetModel(pet);
-  return petInstance.save;
-};
-
-module.exports = PetModel;
+petSchema.plugin(autopopulate);
+module.exports = model('Pet', petSchema);

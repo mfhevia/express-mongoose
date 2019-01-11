@@ -38,8 +38,26 @@ describe('POST /pets', () => {
       .post('/pets')
       .send(pet)
       .expect(201)
-      .then((response) => {
-        // TODO
+      .then(({ body }) => {        
+        expect(body).to.include(pet);
+        done();
+      });
+  });
+
+  it('Should fail when body is invalid', (done) => {
+    const pet = {
+      name: 'Snoopy',
+      type: 'human',
+      size: 'medium',
+      color: 'white',
+    };
+
+    request(app)
+      .post('/pets')
+      .send(pet)
+      .expect(400)
+      .then(({ body }) => {        
+        expect(body.error).to.be.equal('Bad Request');
         done();
       });
   });
